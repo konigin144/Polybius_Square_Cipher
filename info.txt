@@ -1,0 +1,5 @@
+Szyfr Polibiusza jest przedstawicielem rodziny szyfrów monoalfabetycznych. Zasada jego działania opiera się na specjalnej macierzy o wymiarach 5 × 5. Tablica ta jest wypełniona od góry wierszami najpierw słowem-kluczem, a potem kolejnym literami alfabetu (poczynając od następnej po ostatniej literze klucza). Żadna litera w tablicy nie może się powtórzyć.
+
+Pól w tabeli jest 25, a liter 26, więc przyjęło się traktować "I" i "J" jako ten sam znak.
+
+Ta implementacja usuwa z tekstu wszystkie znaki poza literami (w tym znaki białe). Zamienia również polskie litery na łacińskie "odpowiedniki".
