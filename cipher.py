@@ -7,10 +7,13 @@ import re, os
 
 class Okno(QMainWindow):
     def __init__(self, *args, **kwargs):
+        #region Window and widgets
+        #Window
         super(Okno, self).__init__(*args, *kwargs)
         self.setWindowTitle("Polybius Square Cipher")
         self.setWindowIcon(QIcon('Icons/key.png'))
 
+        #Title
         titleText = QLabel()
         titleText.setText("Polybius Square Cipher")
         titleText.setAlignment(Qt.AlignHCenter)
@@ -27,6 +30,7 @@ class Okno(QMainWindow):
         titleLayoutW = QWidget()
         titleLayoutW.setLayout(titleLayout)
 
+        #Message and key
         self.messageField = QLineEdit()
         self.messageField.setPlaceholderText("Enter message here...")
 
@@ -51,12 +55,14 @@ class Okno(QMainWindow):
         textFieldsLayoutW = QWidget()
         textFieldsLayoutW.setLayout(textFieldsLayout)
 
+        #Message and key from files
         self.messageFromFileButton = QFileDialog()
         self.messageFromFileButton.hide()
 
         self.keyFromFileButton = QFileDialog()
         self.keyFromFileButton.hide()
 
+        #Buttons
         encryptButton = QPushButton()
         encryptButton.setText("ENCRYPT")
         encryptButton.setFont(QFont('Lucida Console',10))
@@ -80,6 +86,7 @@ class Okno(QMainWindow):
         buttonsLayoutW = QWidget()
         buttonsLayoutW.setLayout(buttonsLayout)
 
+        #Output
         titleOutputText = QLabel()
         titleOutputText.setText("Output:")
         titleOutputText.setAlignment(Qt.AlignCenter)
@@ -104,29 +111,34 @@ class Okno(QMainWindow):
         outputLayoutW = QWidget()
         outputLayoutW.setLayout(outputLayout)
 
-        mainMenu = QVBoxLayout()
-        mainMenu.setAlignment(Qt.AlignCenter)
-        mainMenu.addWidget(titleLayoutW)
-        mainMenu.addWidget(textFieldsLayoutW)
-        mainMenu.addWidget(buttonsLayoutW)
-        mainMenu.addWidget(outputLayoutW)
+        #Main layout
+        main = QVBoxLayout()
+        main.setAlignment(Qt.AlignCenter)
+        main.addWidget(titleLayoutW)
+        main.addWidget(textFieldsLayoutW)
+        main.addWidget(buttonsLayoutW)
+        main.addWidget(outputLayoutW)
 
-        mainMenuW = QWidget()
-        mainMenuW.setLayout(mainMenu)
+        mainW = QWidget()
+        mainW.setLayout(main)
 
-        self.setCentralWidget(mainMenuW)
+        self.setCentralWidget(mainW)
+        #endregion
 
     def encryptClicked(self):
+        """Handles encrypt button"""
         self.outputText.setText(encrypt(self.messageField.text(), self.keyField.text()))
         self.saveButton.setEnabled(True)
         self.matrixButton.setEnabled(True)
 
     def decryptClicked(self):
+        """Handles decrypt button"""
         self.outputText.setText(decrypt(self.messageField.text(), self.keyField.text()))
         self.saveButton.setEnabled(True)
         self.matrixButton.setEnabled(True)
 
     def messageFileClicked(self):
+        """Loads message from file"""
         self.keyFromFileButton.hide()
         self.messageFromFileButton.show()
 
@@ -138,6 +150,7 @@ class Okno(QMainWindow):
                 self.messageField.setText(data)
 
     def keyFileClicked(self):
+        """Loads key from file"""
         self.messageFromFileButton.hide()
         self.keyFromFileButton.show()
 
@@ -149,7 +162,7 @@ class Okno(QMainWindow):
                 self.keyField.setText(data)
 
     def saveClicked(self):
-        #self.subtitleText.setText("Zapisuje")
+        """Saves output to file"""
         filename = QFileDialog.getSaveFileName(self, "Open Text File", os.path.abspath(os.getcwd()), "Text Files (*.txt)")
         if filename[0] != '':
             f = open(filename[0], "w")
@@ -157,8 +170,10 @@ class Okno(QMainWindow):
             f.close
 
     def infoWindow(self):
+        """Opens info window"""
         infoW = QMessageBox()
         infoW.setWindowTitle("Polybius Square Cipher")
+        infoW.setWindowIcon(QIcon('Icons/info.png'))
         f = open("info.txt", "r", encoding='utf8')
         text = f.read()
         infoW.setText(text)
@@ -166,6 +181,7 @@ class Okno(QMainWindow):
         infoW.exec_()
 
     def matrixWindow(self):
+        """Shows matrix"""
         self.matrix = QTableWidget()
         self.matrix.setWindowTitle("Matrix")
         self.matrix.setRowCount(5)
@@ -184,6 +200,7 @@ class Okno(QMainWindow):
         self.matrix.show()
 
 def unPolishText(text):
+    """Converts Polish letters to Latin"""
     polish = "ĄĆĘŁŃÓŚŹŻ"
     normal = "ACELNOSZZ"
     table = text.maketrans(polish, normal)
@@ -191,6 +208,7 @@ def unPolishText(text):
 
 
 def generate_array(key=''):
+    """Generates Polybius square"""
     abc = 'ABCDEFGHIKLMNOPQRSTUVWXYZ'
     arr_el=[]
     arr = []
@@ -212,6 +230,7 @@ def generate_array(key=''):
     return arr
         
 def encrypt(word, key=''):
+    """Encrypts message"""
     word = word.upper()
     key = key.upper()
     word = re.sub(r'J','I', word)
@@ -231,6 +250,7 @@ def encrypt(word, key=''):
     return output
 
 def decrypt(word, key=''):
+    """Decrypts message"""
     word = word.upper()
     key = key.upper()
     key = re.sub(r'J','I', key)
@@ -245,7 +265,7 @@ def decrypt(word, key=''):
         output+=str(letter)
     return output
 
-##### MAIN
+#App and window initialization
 app = QApplication(sys.argv)
 
 window = Okno()
