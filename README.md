@@ -1,6 +1,8 @@
 # Polybius_Square_Cipher
 Encoding and decoding Polybius cipher
 
+Python // GUI created with PyQT
+
 
 
 Icons source:
