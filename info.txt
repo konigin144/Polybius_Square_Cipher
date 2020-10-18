@@ -2,3 +2,5 @@ Szyfr Polibiusza wykorzystuje macierz o wymiarach 5 × 5. Wypełniona jest od g�
 Podczas szyfrowania każda kolejna litera wyrażenia zastępowana jest porą cyfr: współrzędnymi kolumny i wiersza. Ostatecznie szyfrogram ma postać ciągu cyfr z zakresu 1-5.
 
 Implementacja usuwa z tekstu wszystkie znaki poza literami (w tym znaki białe). Wszystkie litery zamieniane są na wielkie, a polskie litery na łacińskie "odpowiedniki".
+
+Użytkownik może wprowadzić klucz i tekst do zaszyfrowania/odszyfrowania ręcznie lub przesłać pliki .txt. Istnieje też możliwość zapisania do pliku wyniku szyfrowania/deszyfrowania.

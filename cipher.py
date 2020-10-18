@@ -57,9 +57,11 @@ class Okno(QMainWindow):
 
         #Message and key from files
         self.messageFromFileButton = QFileDialog()
+        self.messageFromFileButton.setNameFilter("Text Files (*.txt)")
         self.messageFromFileButton.hide()
 
         self.keyFromFileButton = QFileDialog()
+        self.keyFromFileButton.setNameFilter("Text Files (*.txt)")
         self.keyFromFileButton.hide()
 
         #Buttons
@@ -144,7 +146,7 @@ class Okno(QMainWindow):
 
         if self.messageFromFileButton.exec():
             files = self.messageFromFileButton.selectedFiles()
-            f = open(files[0], 'r')
+            f = open(files[0], 'r', encoding='utf8')
             with f:
                 data = f.read()
                 self.messageField.setText(data)
@@ -156,7 +158,7 @@ class Okno(QMainWindow):
 
         if self.keyFromFileButton.exec():
             files = self.keyFromFileButton.selectedFiles()
-            f = open(files[0], 'r')
+            f = open(files[0], 'r', encoding='utf8')
             with f:
                 data = f.read()
                 self.keyField.setText(data)
