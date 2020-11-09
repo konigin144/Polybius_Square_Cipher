@@ -176,6 +176,7 @@ class Okno(QMainWindow):
         infoW = QMessageBox()
         infoW.setWindowTitle("Polybius Square Cipher")
         infoW.setWindowIcon(QIcon('Icons/info.png'))
+        infoW.setFont(QFont('Lucida Console'))
         f = open("info.txt", "r", encoding='utf8')
         text = f.read()
         infoW.setText(text)

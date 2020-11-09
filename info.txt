@@ -4,3 +4,17 @@ Podczas szyfrowania każda kolejna litera wyrażenia zastępowana jest porą cyf
 Implementacja usuwa z tekstu wszystkie znaki poza literami (w tym znaki białe). Wszystkie litery zamieniane są na wielkie, a polskie litery na łacińskie "odpowiedniki".
 
 Użytkownik może wprowadzić klucz i tekst do zaszyfrowania/odszyfrowania ręcznie lub przesłać pliki .txt. Istnieje też możliwość zapisania do pliku wyniku szyfrowania/deszyfrowania.
+
+Przykład:
+Klucz: POLITECHNIKA
+Wiadomość: POLYBIUS CIPHER
+
+    |   1   2   3   4   5
+____|_____________________         P -> 11
+1   |   P   A   Z   D   I          O -> 24
+2   |   E   R   N   K   B          L -> 53
+3   |   C   F   G   H   L          Y -> 55
+4   |   M   O   Q   S   T          B -> 52
+5   |   U   V   W   X   Y            ...
+
+Zaszyfrowana wiadomość: 1124535552511544135111431222
